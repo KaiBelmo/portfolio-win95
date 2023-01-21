@@ -1,0 +1,15 @@
+[x] - taskbar
+[x] - translucent selection rectangle
+[x] - slot window
+[x] - pop up
+[x] - change position of a window (click and drag)
+[x] - render apps
+[x] - make the app icon draggable
+[x] - add trash
+[x] - add notepad
+[x] - add about me
+[x] - add cmd
+[ ] - add chrome
+[ ] - maximize & minimize button
+[ ] - resize window
+[ ] - add blog section

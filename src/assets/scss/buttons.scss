@@ -1,0 +1,57 @@
+/* todo: seperate button code from outline window */
+
+.windows_95_button {
+    font-size: 10px;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+}
+
+.windows_95_button:active {
+    border-bottom: rgb(223, 223, 223) 1px solid;
+    border-right: rgb(223, 223, 223) 1px solid;
+    border-top: rgb(61, 61, 61) 1px solid;
+    border-left: rgb(61, 61, 61) 1px solid;
+    box-shadow: -1px -1px 0 black,
+        0px -1px 0 black,
+        -1px 0px 0 black,
+        -1px 1px 0 white,
+        0px 1px 0 white,
+        1px 1px 0 white,
+        1px -1px 0 white,
+        1px 0px 0 white;
+    background-color: #adadad;
+}
+
+.window_95_link {
+    padding: 0 10px 0 10px;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+.window_95_link:hover {
+    color: rgb(170, 33, 33);
+    cursor: pointer;
+    position: relative;
+    animation: blink .5s infinite;
+}
+
+.window_95_link:hover::after {
+    content: "<";
+    position: absolute;
+    right: 0px;
+}
+.window_95_link:hover::before {
+    content: ">";
+    left: 0px;
+    position: absolute;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.weight_600 {
+    font-weight: 600;
+}
