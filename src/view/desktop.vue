@@ -12,16 +12,15 @@ import RenderingApps from '@/components/RenderingApps.vue';
 import SelectionRectangle from '@/components/selectionRectangle.vue';
 import TaskBar from '@/components/TaskBar.vue'
 import { onMounted } from 'vue';
-// import click from './src/assets/sounds/click_sound.mp3'
+import click from '@/assets/sounds/click_sound.mp3'
+onMounted(() => {
+  document.querySelector('button')!.addEventListener('click', function () {
+    const audio: HTMLAudioElement = new Audio(click);
+    audio.play();
+  });
+  document.addEventListener('contextmenu', event => event.preventDefault());
+})
 
-// onMounted(() => {
-//   document.querySelector('button')!.addEventListener('click', function () {
-//     const audio: HTMLAudioElement = new Audio('./src/assets/sounds/click_sound.mp3');
-//     audio.play();
-//   });
-//   document.addEventListener('contextmenu', event => event.preventDefault());
-
-// })
 
 </script>
 
