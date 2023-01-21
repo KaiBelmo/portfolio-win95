@@ -11,7 +11,7 @@
                             on twitter</li>
                         <li class="window_95_link" @click="openLink('mailto:belmomohamedali@gmail.com', '_self')">
                             contact me or hire me</li>
-                        <li class="window_95_link" @click="openLink('', '_blank')">star this project on github</li>
+                        <li class="window_95_link" @click="openLink('https://github.com/KaiBelmo/kai-belmo', '_blank')">star this project on github</li>
                     </ul>
                     <button class="windows_95_button close_btn window_outline" @click="(showPopup = false)">close</button>
                 </div>

@@ -46,7 +46,7 @@
                                         <hr>
                                         <div class="project-container window_outline">
                                             <div class="body">
-                                                <h5 @click="openLink('', '_blank')" style="cursor: help;">
+                                                <h5 @click="openLink('https://github.com/KaiBelmo/kai-belmo', '_blank')" style="cursor: help;">
                                                     Personal website : <span>(Vue.js - Typescript - Pinia - SASS -
                                                         Canvas)</span>
                                                 </h5>
