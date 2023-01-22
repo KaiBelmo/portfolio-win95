@@ -44,7 +44,8 @@
                                         <hr>
                                         <div class="project-container window_outline">
                                             <div class="body">
-                                                <h5 @click="openLink('https://github.com/KaiBelmo/kai-belmo', '_blank')" style="cursor: help;">
+                                                <h5 @click="openLink('https://github.com/KaiBelmo/kai-belmo', '_blank')"
+                                                    style="cursor: help;">
                                                     Personal website : <span>(Vue.js - Typescript - Pinia - SASS -
                                                         Canvas)</span>
                                                 </h5>
@@ -91,9 +92,11 @@
                                         <h6>Hover over the text to decode it.</h6>
                                     </div>
                                     <div class="button-wrapper">
-                                        <button class="windows_95_button window_outline" 
+                                        <button class="windows_95_button window_outline"
+                                            :class="{ 'disabled-text': currentSlideIndex === 0 }"
                                             @click="currentSlideIndex = currentSlideIndex === 0 ? 0 : (currentSlideIndex - 1) % 3">back
                                         </button>
+
                                         <button class="windows_95_button window_outline"
                                             @click="currentSlideIndex = (currentSlideIndex + 1) % 3">next</button>
                                     </div>
