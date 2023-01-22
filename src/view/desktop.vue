@@ -1,4 +1,3 @@
-<!-- todo: use scss to add responsive design  -->
 <template>
   <div>
     <selection-rectangle />

@@ -6,8 +6,6 @@
                 <div class="container">
                     <div>
                         <div class="body">
-                            <!-- todo: keep the image fix and change the content, about me, skills projects -->
-                            <!-- maybe add page 1 2 3 4, and switch between them using a button -->
                             <div class="aboutme-container">
                                 <div class="img-wrapper">
                                     <img src="@/assets/random_.png" alt="random image from giphy">
@@ -93,7 +91,7 @@
                                         <h6>Hover over the text to decode it.</h6>
                                     </div>
                                     <div class="button-wrapper">
-                                        <button class="windows_95_button window_outline"
+                                        <button class="windows_95_button window_outline" 
                                             @click="currentSlideIndex = currentSlideIndex === 0 ? 0 : (currentSlideIndex - 1) % 3">back
                                         </button>
                                         <button class="windows_95_button window_outline"
