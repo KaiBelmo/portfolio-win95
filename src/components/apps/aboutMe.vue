@@ -11,7 +11,7 @@
                                     <img src="@/assets/random_.png" alt="random image from giphy">
                                 </div>
                                 <div class="section-wrapper">
-                                    <!-- 2: skills -->
+                                    <!-- 1: skills -->
                                     <div v-if="currentSlideIndex === 0" class="skills-wrapper">
                                         <h3>Skills</h3>
                                         <hr>
@@ -96,7 +96,6 @@
                                             :class="{ 'disabled-text': currentSlideIndex === 0 }"
                                             @click="currentSlideIndex = currentSlideIndex === 0 ? 0 : (currentSlideIndex - 1) % 3">back
                                         </button>
-
                                         <button class="windows_95_button window_outline"
                                             @click="currentSlideIndex = (currentSlideIndex + 1) % 3">next</button>
                                     </div>
@@ -122,9 +121,10 @@ import '@/assets/scss/base.scss'
 let appStore = useAppStore();
 let displayWindow: Ref<boolean> = ref(true);
 let displayedText: string = `
+    I don't like to describe myself in text, so here's a lorem ipsum xD.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem.
-    for more information contact me xd.
+    Nam viverra euismod odio, gravida pellentesque urna varius vitae.
+    for some real information contact me!.
     `;
 let tmpArr: string[] = []
 let cipheredText: Ref<string[]> = ref([])
