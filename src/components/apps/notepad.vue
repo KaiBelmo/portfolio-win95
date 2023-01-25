@@ -31,7 +31,7 @@
                                     <li class="disabled-text">word wrap</li>
                                 </ul>
                             </li>
-                            <li class="menu-section">seach
+                            <li class="menu-section">search
                                 <ul class="menu-dropdown window_outline">
                                     <li class="disabled-text">find</li>
                                 </ul>
