@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import OutlineWindow from '@/components/slots/outlineWindow.vue';
 import '@/assets/scss/buttons.scss'
-import { openLink } from '@/assets/ts/core'
+import { openLink } from '@/assets/ts/utils'
 import { onMounted, ref, type Ref } from 'vue';
 import popup from '@/assets/sounds/popup_sound.mp3'
 

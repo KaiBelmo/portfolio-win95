@@ -73,7 +73,7 @@
 import { nextTick, onMounted, ref, type Ref } from 'vue';
 import '@/assets/scss/buttons.scss'
 import '@/assets/scss/base.scss'
-import { openLink } from '@/assets/ts/core'
+import { openLink } from '@/assets/ts/utils'
 import { useAppStore } from '@/stores/appStore';
 
 let appStore = useAppStore();

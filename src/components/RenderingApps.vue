@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import '@/assets/scss/base.scss'
-import type { Coordinates } from '@/assets/ts/core'
+import { type Coordinates, isDesktop } from '@/assets/ts/utils'
 import { ref } from 'vue';
 import Popup from './apps/popup.vue';
 import { useAppStore } from '@/stores/appStore';
@@ -50,7 +50,11 @@ let openApp = (index: number) => {
     appStore.index = index
     appStore.apps[index].openWindow = !appStore.apps[index].openWindow;
 }
-const startDrag = (event: MouseEvent, index: number) => {
+const startDrag = (event: MouseEvent, index: number) => {    
+    if (!isDesktop()){
+        openApp(index);
+        return;
+    }
     if (appWrapper.value === null)
         return;
     let appWrapperElement = appWrapper.value[index] as HTMLElement;

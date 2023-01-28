@@ -113,7 +113,7 @@
 import { onMounted, ref, type Ref } from 'vue';
 import OutlineWindow from '@/components/slots/outlineWindow.vue';
 import { useAppStore } from '@/stores/appStore';
-import { openLink } from '@/assets/ts/core'
+import { openLink } from '@/assets/ts/utils'
 import '@/assets/scss/buttons.scss'
 import '@/assets/scss/base.scss'
 

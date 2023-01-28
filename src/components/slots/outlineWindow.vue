@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import '@/assets/scss/base.scss'
-import type { Coordinates } from '@/assets/ts/core'
+import type { Coordinates } from '@/assets/ts/utils'
 import { resizeWindow } from '@/assets/ts/resizeWindow'
 
 const windowHeader = ref<HTMLInputElement | null>(null);
