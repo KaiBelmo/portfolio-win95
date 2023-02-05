@@ -25,8 +25,5 @@ export let initRecycleBin = (): IRecycleBin[] => {
         {
             name: "java", originalLocation: "java.com", deletedDate: "2017", type: "programming language", size: "84,5mb"
         },
-        {
-            name: "wadie", originalLocation: "github.com/wadie-ess", deletedDate: "2023", type: "friend", size: "80kg"
-        }
     ]
 }
