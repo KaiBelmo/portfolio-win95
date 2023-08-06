@@ -1,6 +1,6 @@
 [
   {
-    "title": "languages",
+    "title": "Languages",
     "skills": [
       "C",
       "C++",
@@ -9,7 +9,7 @@
     ]
   },
   {
-    "title": "front end",
+    "title": "Front end",
     "skills": [
       "HTML",
       "CSS",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "title": "developer tools",
+    "title": "Developer tools",
     "skills": [
       "Git",
       "VS Code",

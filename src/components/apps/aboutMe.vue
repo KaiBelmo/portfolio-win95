@@ -27,7 +27,7 @@
                         {{ item.title }}
                       </h4>
                       <p>
-                        {{ item.skills.join(' - ') }}
+                        {{ item.skills.join(" - ") }}
                       </p>
                     </div>
                   </div>
@@ -254,8 +254,8 @@ onMounted(() => {
 }
 
 .skills-wrapper {
-  & > p {
-    font-size: 14px;
+  & > div > p {
+    font-size: 15px;
   }
 }
 
