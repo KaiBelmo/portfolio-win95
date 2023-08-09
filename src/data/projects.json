@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Code racer",
+    "technologies": ["Next.js", "TypeScript", "Tailwind"],
+    "description": "Code Racer is a multiplayer coding game where developers can compete against each other to solve programming challenges in real-time.",
+    "isOpenSource": true,
+    "githubRepo": "https://github.com/webdevcody/code-racer/commits?author=KaiBelmo"
+  },
+  {
+    "name": "No404",
+    "technologies": ["Javascript"],
+    "description": "This extension enables access to archived versions of websites you visit and provides a way to access content from removed websites.",
+    "isOpenSource": false,
+    "githubRepo": "https://github.com/KaiBelmo/no404"
+  },
+  {
+    "name": "Personal Website",
+    "technologies": ["Next.js", "TypeScript", "Tailwind"],
+    "description": "My personal website is built using Next.js 13, TypeScript and Tailwind CSS.",
+    "isOpenSource": false,
+    "githubRepo": "https://github.com/KaiBelmo/portfolio"
+  },
+  {
+    "name": "Personal Website (win-95 version)",
+    "technologies": ["Vue.js", "Typescript"],
+    "description": "this.",
+    "isOpenSource": false,
+    "githubRepo": "https://github.com/KaiBelmo/portfolio-win95"
+  },
+  {
+    "name": "b1m0-dbg",
+    "technologies": ["C programming"],
+    "description": "linux debugger.",
+    "isOpenSource": false,
+    "githubRepo": "https://github.com/KaiBelmo/b1m0-dbg"
+  },
+  {
+    "name": "libC--",
+    "technologies": ["C programming"],
+    "description": "C++ containers but in C.",
+    "isOpenSource": false,
+    "githubRepo": "https://github.com/KaiBelmo/libC--"
+  },
+  {
+    "name": "libCplus",
+    "technologies": ["C programming"],
+    "description": "Wonderful library with lots of useful functions, algorithms and data structures in C.",
+    "isOpenSource": true,
+    "githubRepo": "https://github.com/BnademOverflow/libCplus/commits?author=KaiBelmo"
+  }
+]

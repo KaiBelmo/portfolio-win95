@@ -8,133 +8,86 @@
       <template v-slot:header>About me - corrupted file</template>
       <template v-slot:body>
         <div class="container">
-          <div>
-            <div class="body">
-              <div class="aboutme-container">
-                <div class="img-wrapper">
-                  <img
-                    src="@/assets/random_.png"
-                    alt="random image from giphy"
-                  />
+            <div class="aboutme-container">
+              <div class="img-wrapper">
+                <img src="@/assets/random_.png" alt="random image from giphy" />
+              </div>
+              <div class="section-wrapper">
+                <!-- 0: skills -->
+                <div v-if="currentSlideIndex === 0" class="skills-wrapper">
+                  <h3>Skills</h3>
+                  <hr />
+                  <div v-for="skill in skillsData" :key="skill.title">
+                    <h4>
+                      {{ skill.title }}
+                    </h4>
+                    <p>
+                      {{ skill.skills.join(" - ") }}
+                    </p>
+                  </div>
                 </div>
-                <div class="section-wrapper">
-                  <!-- 1: skills -->
-                  <div v-if="currentSlideIndex === 0" class="skills-wrapper">
-                    <h3>Skills</h3>
-                    <hr />
-                    <div v-for="item in skillsData" :key="item.title">
-                      <h4>
-                        {{ item.title }}
-                      </h4>
-                      <p>
-                        {{ item.skills.join(" - ") }}
-                      </p>
-                    </div>
-                  </div>
-                  <!-- 2: projects -->
-                  <div v-if="currentSlideIndex === 1" class="projects-wrapper">
-                    <h3>
-                      Personal projects
-                      <span
-                        @click="
-                          openLink('https://github.com/kaibelmo', '_blank')
-                        "
-                        style="cursor: pointer"
-                        >for more projects check my github</span
-                      >
-                    </h3>
-                    <hr />
-                    <div class="project-container window_outline">
-                      <div class="body">
+                <!-- 1: projects -->
+                <div v-if="currentSlideIndex === 1" class="projects-wrapper">
+                  <h3>Projects</h3>
+                  <hr />
+                  <div class="add-scroll-bar">
+                    <div v-for="project in projectsData" :key="project.name">
+                      <div class="project-container window_outline">
                         <h5
-                          @click="
-                            openLink(
-                              'https://github.com/KaiBelmo/kai-belmo',
-                              '_blank'
-                            )
-                          "
+                          @click="openLink(project.githubRepo, '_blank')"
                           style="cursor: help"
                         >
-                          Personal website :
-                          <span
-                            >(Vue.js - Typescript - Pinia - SASS - Canvas)</span
-                          >
+                          {{ project.name }}
+                          <span>
+                            {{
+                              project.isOpenSource
+                                ? "Open source contribution"
+                                : "Personal project"
+                            }}
+                          </span>
                         </h5>
-                        <p>this.</p>
+                        <div>{{ project.technologies.join(", ") }}</div>
+                        <p>{{ project.description }}</p>
                       </div>
-                    </div>
-                    <div class="project-container window_outline">
-                      <div class="body">
-                        <h5
-                          @click="
-                            openLink(
-                              'https://github.com/KaiBelmo/libC--',
-                              '_blank'
-                            )
-                          "
-                          style="cursor: help"
-                        >
-                          libC-- : <span>(C programming)</span>
-                        </h5>
-                        <p>C++ containers but in C</p>
-                      </div>
-                    </div>
-                    <div class="project-container window_outline">
-                      <div class="body">
-                        <h5
-                          @click="
-                            openLink(
-                              'https://github.com/KaiBelmo/b1m0-dbg',
-                              '_blank'
-                            )
-                          "
-                          style="cursor: help"
-                        >
-                          b1m0-dbg : <span>(C programming)</span>
-                        </h5>
-                        <p>linux debugger</p>
-                      </div>
-                      <div class="links"></div>
                     </div>
                   </div>
-                  <!-- 1: about me -->
-                  <div v-if="currentSlideIndex === 2" class="aboutme-wrapper">
-                    <h3>A little paragraph about me</h3>
-                    <hr />
-                    <template v-for="(word, index) in cipheredText" :key="word">
-                      <span
-                        class="ciphered"
-                        @mouseenter="decipherWord"
-                        :data-original="tmpArr[index]"
-                      >
-                        {{ word }}
-                      </span>
-                    </template>
-                    <h6>Hover over the text to decode it.</h6>
-                  </div>
-                  <div class="button-wrapper">
-                    <button
-                      class="windows_95_button window_outline"
-                      :class="{ 'disabled-text': currentSlideIndex === 0 }"
-                      @click="
-                        currentSlideIndex =
-                          currentSlideIndex === 0
-                            ? 0
-                            : (currentSlideIndex - 1) % 3
-                      "
+                </div>
+                <!-- 2: about me -->
+                <div v-if="currentSlideIndex === 2" class="aboutme-wrapper">
+                  <h3>A little paragraph about me</h3>
+                  <hr />
+                  <template v-for="(word, index) in cipheredText" :key="word">
+                    <span
+                      class="ciphered"
+                      @mouseenter="decipherWord"
+                      :data-original="tmpArr[index]"
                     >
-                      back
-                    </button>
-                    <button
-                      class="windows_95_button window_outline"
-                      @click="currentSlideIndex = (currentSlideIndex + 1) % 3"
-                    >
-                      next
-                    </button>
-                  </div>
+                      {{ word }}
+                    </span>
+                  </template>
+                  <h6>Hover over the text to decode it.</h6>
+                </div>
+                <div class="button-wrapper">
+                  <button
+                    class="windows_95_button window_outline"
+                    :class="{ 'disabled-text': currentSlideIndex === 0 }"
+                    @click="
+                      currentSlideIndex =
+                        currentSlideIndex === 0
+                          ? 0
+                          : (currentSlideIndex - 1) % 3
+                    "
+                  >
+                    back
+                  </button>
+                  <button
+                    class="windows_95_button window_outline"
+                    @click="currentSlideIndex = (currentSlideIndex + 1) % 3"
+                  >
+                    next
+                  </button>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </template>
@@ -143,16 +96,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from "vue";
+import { onMounted, ref } from "vue";
 import OutlineWindow from "@/components/slots/outlineWindow.vue";
 import { useAppStore } from "@/stores/appStore";
 import { openLink } from "@/assets/ts/utils";
 import "@/assets/scss/buttons.scss";
 import "@/assets/scss/base.scss";
 import skillsData from "@/data/skills.json";
+import projectsData from "@/data/projects.json";
 
 let appStore = useAppStore();
-let displayWindow: Ref<boolean> = ref(true);
+let displayWindow = ref<boolean>(true);
 let displayedText: string = `
     I don't like to describe myself in text, so here's a lorem ipsum xD.
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -160,8 +114,8 @@ let displayedText: string = `
     for some real information contact me!.
     `;
 let tmpArr: string[] = [];
-let cipheredText: Ref<string[]> = ref([]);
-let currentSlideIndex: Ref<number> = ref(0);
+let cipheredText = ref<string[]>([]);
+let currentSlideIndex = ref<number>(0);
 
 let close = (): void => {
   let index: number = appStore.apps.findIndex(
@@ -205,10 +159,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.body {
-  width: 700px;
+.container {
+  width: 730px;
 }
-
 .aboutme-container {
   display: flex;
   flex-direction: row;
@@ -236,13 +189,10 @@ onMounted(() => {
 .aboutme-wrapper,
 .skills-wrapper,
 .projects-wrapper {
-  padding: 0 7px;
+  padding: 0 6px;
   flex-grow: 1;
-
-  & > h6 {
-    font-size: 7px;
-    color: rgb(67, 67, 67);
-    opacity: 0.7;
+  & > hr {
+    margin: 3px 0px;
   }
 }
 
@@ -254,15 +204,23 @@ onMounted(() => {
 }
 
 .skills-wrapper {
+  flex-grow: 1;
   & > div > p {
     font-size: 15px;
+    opacity: 0.7;
+  }
+}
+.aboutme-wrapper {
+  & > h6 {
+    font-size: 7px;
+    color: rgb(67, 67, 67);
+    opacity: 0.8;
   }
 }
 
 .button-wrapper {
   align-self: flex-end;
   display: flex;
-
   & > * {
     margin: 5px 7px 2px 7px;
     padding: 2px 7px;
@@ -270,28 +228,32 @@ onMounted(() => {
 }
 
 .project-container {
-  width: 100%;
-  margin: 10px 0px;
-
-  &:last-child {
-    margin-bottom: 0;
+  margin: 7px 0px;
+  padding: 10px 15px;
+  & > h5 > span {
+    font-size: 10px;
+    opacity: 0.7;
   }
-
-  & > .body {
-    padding: 10px;
-
-    & > h5 > span {
-      font-size: 9px;
-      opacity: 0.7;
-    }
-
-    & > p {
-      font-size: 11px;
-    }
+  & > p {
+    font-size: 11px;
+    max-height: 45px;
+    overflow-y: auto;
+    padding-right: 1px;
+    opacity: 0.8;
+  }
+  & > div {
+    font-weight: 700;
+    font-size: 10px;
+    opacity: .8;
   }
 }
 
 .projects-wrapper {
+  & > .add-scroll-bar {
+    padding: 1px 7px 5px 2px;
+    max-height: 218px;
+    overflow: auto;
+  }
   & > h3 > span {
     font-size: 10px;
     opacity: 0.7;
@@ -300,24 +262,14 @@ onMounted(() => {
 
 // phones
 @media (max-width: 500px) {
-  .body {
-    width: 340px;
+  .container {
+    height: 330px;
+    width: 330px;
   }
-
   .aboutme-container {
     & > .img-wrapper {
       display: none;
       margin: 0;
-    }
-  }
-
-  .skills-wrapper {
-    & > p {
-      font-size: 10px;
-    }
-
-    & > h4 {
-      font-size: 14px;
     }
   }
 
@@ -329,53 +281,48 @@ onMounted(() => {
 
     & > h3 {
       font-size: 16px;
-
-      & > span {
-        display: none;
-      }
-    }
-
-    & > h6 {
-      font-size: 6px;
-      color: rgb(67, 67, 67);
-      opacity: 0.7;
     }
   }
+  .projects-wrapper {
+  & > .add-scroll-bar {
+    max-height: 230px;
+  }
+}
 
-  .project-container {
-    width: 100%;
-    margin: 5px 0px;
-
-    &:last-child {
-      margin-bottom: 0;
+.skills-wrapper {
+    min-height: 274px;
+    & > div > p {
+      font-size: 13px;
     }
 
-    & > .body {
-      padding: 10px;
-
-      & > h5 {
-        font-size: 11px;
-      }
-
-      & > h5 > span {
-        font-size: 8px;
-        white-space: nowrap;
-        opacity: 0.7;
-      }
-
-      & > p {
-        font-size: 10px;
-      }
+    & > div > h4 {
+      font-size: 14px;
+    }
+  }
+  .project-container {
+    padding: 10px;
+    & > h5 {
+      font-size: 13px;
+    }
+    & > h5 > span {
+      font-size: 9px;
+    }
+    & > div {
+      font-size: 9px;
+    }
+    & > p {
+      max-height: 30px;
+      font-size: 9px;
     }
   }
 }
 
 // tablets
 @media (min-width: 501px) and (max-width: 767px) {
-  .body {
+  .container {
+    // height: 335px;
     width: 400px;
   }
-
   .aboutme-container {
     & > .img-wrapper {
       display: none;
@@ -421,19 +368,16 @@ onMounted(() => {
     &:last-child {
       margin-bottom: 0;
     }
+    padding: 10px;
 
-    & > .body {
-      padding: 10px;
+    & > h5 > span {
+      font-size: 10px;
+      white-space: nowrap;
+      opacity: 0.7;
+    }
 
-      & > h5 > span {
-        font-size: 10px;
-        white-space: nowrap;
-        opacity: 0.7;
-      }
-
-      & > p {
-        font-size: 11px;
-      }
+    & > p {
+      font-size: 11px;
     }
   }
 }
