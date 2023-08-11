@@ -8,86 +8,84 @@
       <template v-slot:header>About me - corrupted file</template>
       <template v-slot:body>
         <div class="container">
-            <div class="aboutme-container">
-              <div class="img-wrapper">
-                <img src="@/assets/random_.png" alt="random image from giphy" />
-              </div>
-              <div class="section-wrapper">
-                <!-- 0: skills -->
-                <div v-if="currentSlideIndex === 0" class="skills-wrapper">
-                  <h3>Skills</h3>
-                  <hr />
-                  <div v-for="skill in skillsData" :key="skill.title">
-                    <h4>
-                      {{ skill.title }}
-                    </h4>
-                    <p>
-                      {{ skill.skills.join(" - ") }}
-                    </p>
-                  </div>
+          <div class="aboutme-container">
+            <div class="img-wrapper">
+              <img src="@/assets/random_.png" alt="random image from giphy" />
+            </div>
+            <div class="section-wrapper">
+              <!-- 0: skills -->
+              <div v-if="currentSlideIndex === 0" class="skills-wrapper">
+                <h3>Skills</h3>
+                <hr />
+                <div v-for="skill in skillsData" :key="skill.title">
+                  <h4>
+                    {{ skill.title }}
+                  </h4>
+                  <p>
+                    {{ skill.skills.join(" - ") }}
+                  </p>
                 </div>
-                <!-- 1: projects -->
-                <div v-if="currentSlideIndex === 1" class="projects-wrapper">
-                  <h3>Projects</h3>
-                  <hr />
-                  <div class="add-scroll-bar">
-                    <div v-for="project in projectsData" :key="project.name">
-                      <div class="project-container window_outline">
-                        <h5
-                          @click="openLink(project.githubRepo, '_blank')"
-                          style="cursor: help"
-                        >
-                          {{ project.name }}
-                          <span>
-                            {{
-                              project.isOpenSource
-                                ? "Open source contribution"
-                                : "Personal project"
-                            }}
-                          </span>
-                        </h5>
-                        <div>{{ project.technologies.join(", ") }}</div>
-                        <p>{{ project.description }}</p>
-                      </div>
+              </div>
+              <!-- 1: projects -->
+              <div v-if="currentSlideIndex === 1" class="projects-wrapper">
+                <h3>Projects</h3>
+                <hr />
+                <div class="add-scroll-bar">
+                  <div v-for="project in projectsData" :key="project.name">
+                    <div class="project-container window_outline">
+                      <h5
+                        @click="openLink(project.githubRepo, '_blank')"
+                        style="cursor: help"
+                      >
+                        {{ project.name }}
+                        <span>
+                          {{
+                            project.isOpenSource
+                              ? "Open source contribution"
+                              : "Personal project"
+                          }}
+                        </span>
+                      </h5>
+                      <div>{{ project.technologies.join(", ") }}</div>
+                      <p>{{ project.description }}</p>
                     </div>
                   </div>
                 </div>
-                <!-- 2: about me -->
-                <div v-if="currentSlideIndex === 2" class="aboutme-wrapper">
-                  <h3>A little paragraph about me</h3>
-                  <hr />
-                  <template v-for="(word, index) in cipheredText" :key="word">
-                    <span
-                      class="ciphered"
-                      @mouseenter="decipherWord"
-                      :data-original="tmpArr[index]"
-                    >
-                      {{ word }}
-                    </span>
-                  </template>
-                  <h6>Hover over the text to decode it.</h6>
-                </div>
-                <div class="button-wrapper">
-                  <button
-                    class="windows_95_button window_outline"
-                    :class="{ 'disabled-text': currentSlideIndex === 0 }"
-                    @click="
-                      currentSlideIndex =
-                        currentSlideIndex === 0
-                          ? 0
-                          : (currentSlideIndex - 1) % 3
-                    "
-                  >
-                    back
-                  </button>
-                  <button
-                    class="windows_95_button window_outline"
-                    @click="currentSlideIndex = (currentSlideIndex + 1) % 3"
-                  >
-                    next
-                  </button>
-                </div>
               </div>
+              <!-- 2: about me -->
+              <div v-if="currentSlideIndex === 2" class="aboutme-wrapper">
+                <h3>A little paragraph about me</h3>
+                <hr />
+                <template v-for="(cipher, index) in cipheredText" :key="index">
+                  <span
+                    class="ciphered"
+                    :class="{deciphered: !cipher.isCiphered}"
+                    @mouseenter="decipherWord($event, cipher, index)"
+                  >
+                    {{ cipher.word }}
+                  </span>
+                </template>
+                <h6>Hover over the text to decode it.</h6>
+              </div>
+              <div class="button-wrapper">
+                <button
+                  class="windows_95_button window_outline"
+                  :class="{ 'disabled-text': currentSlideIndex === 0 }"
+                  @click="
+                    currentSlideIndex =
+                      currentSlideIndex === 0 ? 0 : (currentSlideIndex - 1) % 3
+                  "
+                >
+                  back
+                </button>
+                <button
+                  class="windows_95_button window_outline"
+                  @click="currentSlideIndex = (currentSlideIndex + 1) % 3"
+                >
+                  next
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </template>
@@ -104,20 +102,16 @@ import "@/assets/scss/buttons.scss";
 import "@/assets/scss/base.scss";
 import skillsData from "@/data/skills.json";
 import projectsData from "@/data/projects.json";
+import aboutMeData from "@/data/aboutme.json";
+import type { cipheredWord } from "@/types/index";
 
-let appStore = useAppStore();
-let displayWindow = ref<boolean>(true);
-let displayedText: string = `
-    I don't like to describe myself in text, so here's a lorem ipsum xD.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Nam viverra euismod odio, gravida pellentesque urna varius vitae.
-    for some real information contact me!.
-    `;
-let tmpArr: string[] = [];
-let cipheredText = ref<string[]>([]);
-let currentSlideIndex = ref<number>(0);
+const appStore = useAppStore();
+const displayWindow = ref<boolean>(true);
+const currentSlideIndex = ref<number>(0);
 
-let close = (): void => {
+const cipheredText = ref<cipheredWord[]>([]);
+
+const close = (): void => {
   let index: number = appStore.apps.findIndex(
     (app) => app.appName === "about me"
   );
@@ -126,7 +120,7 @@ let close = (): void => {
     displayWindow.value = false;
   }
 };
-let cipher = (word: string) => {
+const rot13 = (word: string) => {
   let cipheredWord = "";
   for (const char of word) {
     const charCode = char.charCodeAt(0);
@@ -140,25 +134,37 @@ let cipher = (word: string) => {
   }
   return cipheredWord;
 };
-let decipherWord = (event: MouseEvent) => {
-  if (event.target instanceof HTMLElement) {
-    event.target.style.opacity = "1";
-    event.target.textContent = event.target.getAttribute("data-original");
+
+const decipherWord = (event: MouseEvent, cipher: cipheredWord, idx: number) => {
+  if (event.target instanceof HTMLElement && cipheredText.value[idx].isCiphered) {
+    cipheredText.value[idx] = {
+      word: rot13(cipher.word),
+      isCiphered: false,
+    };
   }
 };
 
 onMounted(() => {
-  tmpArr = displayedText.match(/\S+|\s+/g) || [];
+  // split the string into an array of words and spaces,
+  const tmpArr: string[] = aboutMeData.description.match(/\S+|\s+/g) || [];
   if (tmpArr) {
     cipheredText.value = tmpArr.map((word) => {
-      if (/\s+/.test(word)) return word;
-      return cipher(word);
+      if (/\s+/.test(word))
+        return {
+          isCiphered: true,
+          word: word,
+        };
+      return {
+        isCiphered: true,
+        word: rot13(word),
+      };
     });
   }
 });
 </script>
 
 <style scoped lang="scss">
+// @import url("@/assets/scss/buttons.scss");
 .container {
   width: 730px;
 }
@@ -181,9 +187,12 @@ onMounted(() => {
 .ciphered {
   color: rgb(66, 66, 66);
   font-size: 14px;
-  cursor: pointer;
+  cursor: default;
+  opacity: .5;
   transition: opacity 0.3s ease-out;
-  opacity: 0.5;
+}
+.deciphered {
+  opacity: 1;
 }
 
 .aboutme-wrapper,
@@ -212,9 +221,9 @@ onMounted(() => {
 }
 .aboutme-wrapper {
   & > h6 {
-    font-size: 7px;
-    color: rgb(67, 67, 67);
-    opacity: 0.8;
+    margin-top: 2px;
+    font-size: 9px;
+    opacity: 0.5;
   }
 }
 
@@ -244,7 +253,7 @@ onMounted(() => {
   & > div {
     font-weight: 700;
     font-size: 10px;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -263,7 +272,7 @@ onMounted(() => {
 // phones
 @media (max-width: 500px) {
   .container {
-    height: 330px;
+    height: 335px;
     width: 330px;
   }
   .aboutme-container {
@@ -284,12 +293,14 @@ onMounted(() => {
     }
   }
   .projects-wrapper {
-  & > .add-scroll-bar {
-    max-height: 230px;
+    & > .add-scroll-bar {
+      max-height: 230px;
+    }
   }
-}
-
-.skills-wrapper {
+  .aboutme-wrapper {
+    min-height: 274px;
+  }
+  .skills-wrapper {
     min-height: 274px;
     & > div > p {
       font-size: 13px;
@@ -321,7 +332,7 @@ onMounted(() => {
 @media (min-width: 501px) and (max-width: 767px) {
   .container {
     // height: 335px;
-    width: 400px;
+    width: 500px;
   }
   .aboutme-container {
     & > .img-wrapper {
